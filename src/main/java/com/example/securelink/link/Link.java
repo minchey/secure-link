@@ -9,19 +9,24 @@ public class Link {
     private final LocalDateTime createdAt = LocalDateTime.now();
 
 
-    public boolean isExpired(){
+    public boolean isExpired() {
         LocalDateTime now = LocalDateTime.now();
-        if(expiresAt.isBefore(now)){
+        if (expiresAt.isBefore(now)) {
             return true;
         }
         return false;
     }
 
-    public boolean canUpload(){
+    public boolean canUpload() {
 
     }
 
-    public boolean canDownload(){
 
+    public boolean canDownload() {
+        if (!isExpired() && status.equals(LinkStatus.UPLOADED)) {
+            return true;
+        }
+        return false;
     }
+
 }
