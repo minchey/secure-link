@@ -1,13 +1,12 @@
 package com.example.securelink.link;
 
-import com.example.securelink.link.LinkStatus;
 import java.time.LocalDateTime;
 
 public class Link {
-    String token = "";
-    LinkStatus status;
-    LocalDateTime expiresAt = LocalDateTime.now();
+    private String token = "";
+    private LinkStatus status;
     LocalDateTime createdAt = LocalDateTime.now();
+    LocalDateTime expiresAt;
 
     public boolean isExpired(){
 
