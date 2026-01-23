@@ -5,11 +5,16 @@ import java.time.LocalDateTime;
 public class Link {
     private String token = "";
     private LinkStatus status;
-    LocalDateTime createdAt = LocalDateTime.now();
-    LocalDateTime expiresAt;
+    private LocalDateTime expiresAt;
+    private final LocalDateTime createdAt = LocalDateTime.now();
+
 
     public boolean isExpired(){
-
+        LocalDateTime now = LocalDateTime.now();
+        if(expiresAt.isBefore(now)){
+            return true;
+        }
+        return false;
     }
 
     public boolean canUpload(){
