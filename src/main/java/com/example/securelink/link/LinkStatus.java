@@ -1,4 +1,7 @@
 package com.example.securelink.link;
 
-public class LinkStatus {
+public enum LinkStatus {
+    CREATED,
+    UPLOADED,
+    EXPIRED
 }
