@@ -42,4 +42,8 @@ public class Link {
         return false;
     }
 
+    public String getToken() {
+        return token;
+    }
+
 }
