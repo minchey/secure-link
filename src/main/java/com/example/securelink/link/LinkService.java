@@ -7,7 +7,7 @@ public class LinkService {
 
 
     //링크생성
-    public Link createLink(int expireTime){
+    public Link createLink(int expireTime) {
         String token = UUID.randomUUID().toString();
         LinkStatus status = LinkStatus.CREATED;
         LocalDateTime createAt = LocalDateTime.now();
@@ -17,10 +17,19 @@ public class LinkService {
     }
 
     //업로드 진행
-    public boolean uploadFile(Link link){
-        if(link.canUpload()){
+    public boolean uploadFile(Link link) {
+        if (link.canUpload()) {
             link.markUploaded();
             return true;
-        } return false;
+        }
+        return false;
+    }
+
+    //다운로드 진행
+    public boolean downloadFile(Link link) {
+        if (link.canDownload()) {
+            return true;
+        }
+        return false;
     }
 }
