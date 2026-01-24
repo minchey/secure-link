@@ -1,4 +1,10 @@
 package com.example.securelink.link;
 
-public class LinkRepository {
+import java.util.Optional;
+
+public interface LinkRepository {
+
+    Optional<Link> findByToken(String token);
+
+    void save(Link link);
 }

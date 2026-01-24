@@ -5,6 +5,8 @@ import java.util.UUID;
 
 public class LinkService {
 
+    //private final LinkRepository linkRepository;
+
 
     //링크생성
     public Link createLink(int expireTime) {
