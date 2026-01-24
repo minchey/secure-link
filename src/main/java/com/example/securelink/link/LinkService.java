@@ -17,7 +17,7 @@ public class LinkService {
     }
 
     //업로드 진행
-    public boolean uploadFile(Link link) {
+    public boolean uploadFile(String token) {  //토큰으로 링크를 가져온다
         if (link.canUpload()) {
             link.markUploaded();
             return true;
@@ -26,7 +26,7 @@ public class LinkService {
     }
 
     //다운로드 진행
-    public boolean downloadFile(Link link) {
+    public boolean downloadFile(String token) {  //토큰으로 링크를 가져온다
         if (link.canDownload()) {
             return true;
         }
