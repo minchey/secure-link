@@ -30,6 +30,10 @@ public class Link {
         return false;
     }
 
+    public LinkStatus markUploaded(){
+        return status = LinkStatus.UPLOADED;
+    }
+
 
     public boolean canDownload() {
         if (!isExpired() && status.equals(LinkStatus.UPLOADED)) {
