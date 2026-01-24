@@ -8,6 +8,11 @@ public class Link {
     private LocalDateTime expiresAt;
     private final LocalDateTime createdAt = LocalDateTime.now();
 
+    public Link(String token, LinkStatus status, LocalDateTime expiresAt){
+        this.token = token;
+        this.status = status;
+        this.expiresAt = expiresAt;
+    }
 
     public boolean isExpired() {
         LocalDateTime now = LocalDateTime.now();
