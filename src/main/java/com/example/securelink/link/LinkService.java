@@ -1,6 +1,7 @@
 package com.example.securelink.link;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 public class LinkService {
@@ -23,6 +24,11 @@ public class LinkService {
 
     //업로드 진행
     public boolean uploadFile(String token) {  //토큰으로 링크를 가져온다
+        Optional<Link> result = linkRepository.findByToken(token);
+        if(result.isEmpty()){
+            return false;
+        }
+        Link link = result.get();
         if (link.canUpload()) {
             link.markUploaded();
             return true;
@@ -32,6 +38,12 @@ public class LinkService {
 
     //다운로드 진행
     public boolean downloadFile(String token) {  //토큰으로 링크를 가져온다
+        Optional<Link> result = linkRepository.findByToken(token);
+        if(result.isEmpty()){
+            return false;
+        }
+
+        Link link = result.get();
         if (link.canDownload()) {
             return true;
         }
