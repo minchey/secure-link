@@ -5,8 +5,11 @@ import java.util.UUID;
 
 public class LinkService {
 
-    //private final LinkRepository linkRepository;
+    private final LinkRepository linkRepository;
 
+    public LinkService(LinkRepository linkRepository){
+        this.linkRepository =linkRepository;
+    }
 
     //링크생성
     public Link createLink(int expireTime) {
