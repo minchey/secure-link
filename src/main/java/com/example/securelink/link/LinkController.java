@@ -26,4 +26,5 @@ public class LinkController {
     public boolean download(@PathVariable String token){
         return linkService.downloadFile(token);
     }
+
 }

@@ -46,4 +46,12 @@ public class Link {
         return token;
     }
 
+    public LinkStatus getStatus() {
+        return status;
+    }
+
+    public LocalDateTime getExpiresAt() {
+        return expiresAt;
+    }
+
 }
