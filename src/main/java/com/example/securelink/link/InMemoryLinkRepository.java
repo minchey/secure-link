@@ -1,9 +1,12 @@
 package com.example.securelink.link;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
 public class InMemoryLinkRepository implements LinkRepository {
 
     private final Map<String, Link> store = new HashMap<>();
