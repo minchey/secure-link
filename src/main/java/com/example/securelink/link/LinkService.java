@@ -18,8 +18,9 @@ public class LinkService {
         LinkStatus status = LinkStatus.CREATED;
         LocalDateTime createAt = LocalDateTime.now();
         LocalDateTime expiresAt = createAt.plusHours(expireTime);
-
-        return new Link(token, status, expiresAt);
+        Link link = new Link(token, status, expiresAt);
+        linkRepository.save(link);
+        return link;
     }
 
     //업로드 진행
