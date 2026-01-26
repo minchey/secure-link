@@ -22,7 +22,7 @@ public class LinkController {
         return linkService.uploadFile(token);
     }
 
-    @PostMapping("/{token}/download")  //다운로드 엔드포인트
+    @GetMapping("/{token}/download")  //다운로드 엔드포인트
     public boolean download(@PathVariable String token){
         return linkService.downloadFile(token);
     }
