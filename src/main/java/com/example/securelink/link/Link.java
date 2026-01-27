@@ -20,6 +20,7 @@ public class Link {
         if (expiresAt.isBefore(now)) {
             return true;
         }
+        status = LinkStatus.EXPIRED;
         return false;
     }
 
@@ -41,6 +42,9 @@ public class Link {
         }
         return false;
     }
+
+
+    //getter
 
     public String getToken() {
         return token;
