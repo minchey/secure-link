@@ -27,30 +27,33 @@ public class LinkService {
     }
 
     //업로드 진행
-    public boolean uploadFile(String token) {  //토큰으로 링크를 가져온다
+    public UploadResult uploadFile(String token) {  //토큰으로 링크를 가져온다
         Optional<Link> result = linkRepository.findByToken(token);
         if(result.isEmpty()){
-            return false;
+            return UploadResult.NOT_FOUND;
         }
         Link link = result.get();
-        if (link.canUpload()) {
-            link.markUploaded();
-            return true;
+        if (!link.canUpload()) {
+            return UploadResult.FORBIDDEN;
         }
-        return false;
+
+        link.markUploaded();
+        return UploadResult.SUCCESS;
     }
 
     //다운로드 진행
-    public boolean downloadFile(String token) {  //토큰으로 링크를 가져온다
+    public UploadResult downloadFile(String token) {  //토큰으로 링크를 가져온다
         Optional<Link> result = linkRepository.findByToken(token);
-        if(result.isEmpty()){
-            return false;
+        if (result.isEmpty()) {
+            return UploadResult.NOT_FOUND;
         }
 
         Link link = result.get();
-        if (link.canDownload()) {
-            return true;
+
+        if (!link.canDownload()) {
+            return UploadResult.FORBIDDEN;
         }
-        return false;
+
+        return UploadResult.SUCCESS;
     }
 }

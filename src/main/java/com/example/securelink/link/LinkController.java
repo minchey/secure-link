@@ -26,25 +26,25 @@ public class LinkController {
     @PostMapping("/{token}/upload")  //업로드 엔드포인트
     public ResponseEntity<Void> upload(@PathVariable String token) {
 
-        boolean result = linkService.uploadFile(token);
+        UploadResult result = linkService.uploadFile(token);
 
-        if (result) {
-            return ResponseEntity.ok().build();   // 200
-        }
-
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); // 403
+        return switch (result) {
+            case SUCCESS -> ResponseEntity.ok().build();                  // 200
+            case NOT_FOUND -> ResponseEntity.notFound().build();          // 404
+            case FORBIDDEN -> ResponseEntity.status(HttpStatus.FORBIDDEN).build(); // 403
+        };
     }
 
     @GetMapping("/{token}/download")  //다운로드 엔드포인트
     public ResponseEntity<Void> download(@PathVariable String token) {
 
-        boolean result = linkService.downloadFile(token);
+        UploadResult result = linkService.downloadFile(token);
 
-        if (result) {
-            return ResponseEntity.ok().build();   // 200
-        }
-
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); // 403
+        return switch (result) {
+            case SUCCESS -> ResponseEntity.ok().build();
+            case NOT_FOUND -> ResponseEntity.notFound().build();
+            case FORBIDDEN -> ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        };
     }
 
 }
