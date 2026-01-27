@@ -12,9 +12,13 @@ public class LinkController {
         this.linkService = linkService;
     }
 
-    @PostMapping //링크생성
-    public Link postLink(@RequestParam int expireTime){
-        return linkService.createLink(expireTime);
+    @PostMapping  //링크생성 DTO로 반환
+    public LinkCreateResponse postLink(@RequestParam int expireTime) {
+        Link link = linkService.createLink(expireTime);
+        return new LinkCreateResponse(
+                link.getToken(),
+                link.getExpiresAt().toString()
+        );
     }
 
     @PostMapping("/{token}/upload")  //업로드 엔드포인트
