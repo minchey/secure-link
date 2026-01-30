@@ -41,7 +41,7 @@ public class LinkService {
         return UploadResult.SUCCESS;
     }
 
-    //다운로드 진행
+    //다운로드 진행 method
     public UploadResult downloadFile(String token) {  //토큰으로 링크를 가져온다
         Optional<Link> result = linkRepository.findByToken(token);
         if (result.isEmpty()) {
