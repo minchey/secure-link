@@ -1,7 +1,12 @@
 package com.example.securelink.link;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -27,14 +32,27 @@ public class LinkService {
     }
 
     //업로드 진행
-    public UploadResult uploadFile(String token) {  //토큰으로 링크를 가져온다
+    public UploadResult uploadFile(String token, MultipartFile file) {  //토큰으로 링크를 가져온다
         Optional<Link> result = linkRepository.findByToken(token);
         if(result.isEmpty()){
             return UploadResult.NOT_FOUND;
         }
+
         Link link = result.get();
+
         if (!link.canUpload()) {
             return UploadResult.FORBIDDEN;
+        }
+
+        //최소 파일저장 (로컬)
+        try {
+            Path dir = Paths.get("uploads");
+            Files.createDirectories(dir);
+
+            Path target = dir.resolve(token + "_" + file.getOriginalFilename());
+            file.transferTo(target.toFile());
+        }catch(IOException e){
+            return UploadResult.FORBIDDEN; //단순처리
         }
 
         link.markUploaded();

@@ -3,6 +3,7 @@ package com.example.securelink.link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/links")
@@ -24,9 +25,9 @@ public class LinkController {
     }
 
     @PostMapping("/{token}/upload")  //업로드 엔드포인트
-    public ResponseEntity<Void> upload(@PathVariable String token) {
+    public ResponseEntity<Void> upload(@PathVariable String token, @RequestParam("file")MultipartFile file) {
 
-        UploadResult result = linkService.uploadFile(token);
+        UploadResult result = linkService.uploadFile(token, file);
 
         return switch (result) {
             case SUCCESS -> ResponseEntity.ok().build();                  // 200
